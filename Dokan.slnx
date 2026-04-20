@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Dokan.DataAccess/Dokan.DataAccess.csproj" />
+  <Project Path="Dokan.Models/Dokan.Models.csproj" />
+  <Project Path="Dokan.Utilities/Dokan.Utilities.csproj" />
+  <Project Path="Dokan.Web/Dokan.Web.csproj" Id="bdde43b1-fe3b-413a-a5b2-03b89c69bb50" />
+</Solution>
