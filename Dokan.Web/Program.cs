@@ -1,4 +1,6 @@
 using Dokan.DataAccess.Data;
+using Dokan.DataAccess.ReposIplementaion;
+using Dokan.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 // register Dbcontext with dependency injection
 builder.Services.AddDbContext<DokanDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DokanConnectionString")));
+
+// Register UnitOfWork with dependency injection
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -31,7 +36,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
