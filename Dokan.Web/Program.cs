@@ -10,7 +10,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 // register Dbcontext with dependency injection
 builder.Services.AddDbContext<DokanDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DokanConnectionString")));
 
 var app = builder.Build();
 
