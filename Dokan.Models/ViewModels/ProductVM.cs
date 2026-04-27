@@ -1,6 +1,4 @@
-﻿
-using Dokan.Models.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Dokan.Models.Models.ProductCatalog;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Dokan.Models.ViewModels
@@ -8,8 +6,7 @@ namespace Dokan.Models.ViewModels
     public class ProductVM
     {
         public Product? Product { get; set; }
-        [ValidateNever]
         public IEnumerable<SelectListItem>? CategoryList { get; set; }
-
+        public IEnumerable<SelectListItem>? BrandList { get; set; }
     }
 }

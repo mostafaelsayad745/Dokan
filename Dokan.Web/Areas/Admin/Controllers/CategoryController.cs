@@ -1,5 +1,5 @@
 ﻿using Dokan.DataAccess.Data;
-using Dokan.Models.Models;
+using Dokan.Models.Models.ProductCatalog;
 using Dokan.Models.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -70,21 +70,7 @@ namespace Dokan.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(Guid Id)
-        {
-            if (Id == Guid.Empty)
-            {
-                return NotFound();
-            }
-            var CategoryFromDb = await _unitOfWork.Categories.GetFristOrDefaultAsync(c => c.Id == Id);
-            if (CategoryFromDb == null)
-            {
-                return NotFound();
-            }
-            return View(CategoryFromDb);
-        }
-
-        [HttpPost]
+       
         public async Task<IActionResult> DeleteCategory(Guid Id)
         {
             var categoryFromDb = await _unitOfWork.Categories.GetFristOrDefaultAsync(c => c.Id == Id);

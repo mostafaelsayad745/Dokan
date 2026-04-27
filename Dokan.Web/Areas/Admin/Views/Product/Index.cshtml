@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Product>
+﻿@using Dokan.Models.Models.ProductCatalog
+@model IEnumerable<Product>
 
 @{
     ViewBag.PageTitle = "Product management";
@@ -11,7 +12,7 @@
 </div>
 
     
-<table id="ProductsTable" class="table table-bordered table-striped">
+<table class="table table-bordered table-striped data-table">
     <thead>
         <tr>
             <th>Name</th>
@@ -26,14 +27,12 @@
     {
         <tr>
             <td>@item.Name</td>
-            <td>@item.Description</td>
+            <td>@item.FullDescription</td>
             <td>@item.Price</td>
             <td>@item.Category?.Name</td>
             <td>
                 <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm">Edit</a>
-                <form method="post" asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.Id" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
+                <a asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.Id" class="btn btn-danger btn-sm delete-btn">Delete</a>
             </td>
         </tr>
     }
@@ -41,26 +40,7 @@
 </table>
 
 @section Scripts {
-    <script>
-        $(function () {
-            $("#ProductsTable").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            
-            // Optional: A simpler table without buttons
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
+    <script src="~/js/DataTable&DeleteSweetalert.js"></script>
 }
+
 

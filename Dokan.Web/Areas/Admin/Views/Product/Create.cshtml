@@ -2,38 +2,64 @@
 @model ProductVM
 
 @{
-    ViewBag.PageTitle = "Product managment";
-    ViewBag.CardTitle = "create product";
+    ViewBag.PageTitle = "Product Management";
+    ViewBag.CardTitle = "Create Product";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 <div class="card">
     <div class="card-body">
         <form method="post" asp-action="Create" enctype="multipart/form-data">
-            <div class="mb-3 form-group">
-                <label asp-for="Product.Name" class="form-label"></label>
-                <input asp-for="Product.Name" class="form-control" />
-                <span asp-validation-for="Product.Name" class="text-danger"></span>
-            </div>
-            <div class="mb-3 form-group">
-                <label asp-for="Product.Description" class="form-label"></label>
-                <input asp-for="Product.Description" class="form-control" />
-                <span asp-validation-for="Product.Description" class="text-danger"></span>
-            </div>
-            <div class="mb-3 form-group">       
-                <label asp-for="Product.Img" class="form-label"></label>
-                <input type="file" name="file" id="Img" class="form-control" />
-                <span asp-validation-for="Product.Description" class="text-danger"></span>
-            </div>
-            <div class="mb-3 form-group">
-                <label asp-for="Product.CategoryId" class="form-label"></label>
-                <select asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
-                    <option disabled selected >-- Select Category --</option>
-                </select>
-                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <button type="submit" value="create" class="btn btn-primary">Create</button>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3 form-group">
+                        <label asp-for="Product.Name" class="form-label"></label>
+                        <input asp-for="Product.Name" class="form-control" />
+                        <span asp-validation-for="Product.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label asp-for="Product.FullDescription" class="form-label"></label>
+                        <textarea asp-for="Product.FullDescription" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Product.FullDescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label asp-for="Product.Price" class="form-label"></label>
+                        <input asp-for="Product.Price" class="form-control" />
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label asp-for="Product.CategoryId" class="form-label"></label>
+                        <select asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
+                            <option disabled selected>-- Select Category --</option>
+                        </select>
+                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label asp-for="Product.BrandId" class="form-label"></label>
+                        <select asp-for="Product.BrandId" class="form-control" asp-items="Model.BrandList">
+                            <option disabled selected>-- Select Brand --</option>
+                        </select>
+                        <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="productFiles" class="form-label">Upload Product Images</label>
+                        <input type="file" id="productFiles" name="files" class="form-control" multiple accept="image/*" required />
+                        <small class="text-muted d-block mt-2">
+                            ✓ You can select multiple images at once<br>
+                            ✓ First image will be the main image
+                        </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg">Create Product</button>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg">Cancel</a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

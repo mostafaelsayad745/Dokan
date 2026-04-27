@@ -1,0 +1,54 @@
+﻿@using Dokan.Models.Models.ProductCatalog
+@model IEnumerable<Brand>
+
+@{
+    ViewBag.PageTitle = "brand management";
+    ViewBag.CardTitle = "view brands";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div>
+    <a class="btn btn-primary" asp-action="Create">Create New Brand</a>
+</div>
+
+<br />
+
+
+
+<table class="table table-hover w-100 data-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Logo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brand in Model)
+        {
+            <tr>
+    
+                <td>@brand.Name</td>
+                <td>@brand.Slug </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                    {
+                        <img src="~/@brand.LogoUrl" alt="@brand.Name" width="50" height="50" />
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-controller="Brand" asp-action="BrandDetails" asp-route-id="@brand.Id">Details</a>
+                    <a class="btn btn-info" asp-controller="Brand" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
+                    <a class="btn btn-danger delete-btn" asp-controller="Brand" asp-action="DeleteBrand" asp-route-id="@brand.Id" data-item-name="Brand">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/DataTable&DeleteSweetalert.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+   
+}

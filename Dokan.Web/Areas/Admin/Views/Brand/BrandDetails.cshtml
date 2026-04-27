@@ -1,0 +1,79 @@
+﻿@model Brand
+
+@{
+    ViewBag.PageTitle = "Brand Details";
+    ViewBag.CardTitle = "View Brand Details";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="row">
+    <!-- Brand Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            @if (!string.IsNullOrEmpty(Model.LogoUrl))
+            {
+                <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 10px;">
+                    <img src="~/@Model.LogoUrl" alt="@Model.Name Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+            }
+            else
+            {
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <span class="text-muted">No Logo</span>
+                </div>
+            }
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text text-muted">
+                    <small><strong>Slug:</strong> @Model.Slug</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products List -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Products in this Brand (@Model.Products.Count)</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Products.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model.Products)
+                                {
+                                    <tr>
+                                        <td><strong>@product.Name</strong></td>
+                                        <td>@(string.IsNullOrEmpty(product.ShortDescription) ? "N/A" : product.ShortDescription.Length > 50 ? product.ShortDescription.Substring(0, 50) + "..." : product.ShortDescription)</td>
+                                        <td>
+                                            <a href="@Url.Action("ProductDetails", "Product", new { id = product.Id })" class="btn btn-sm btn-primary">
+                                                View Details
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        No products found for this brand.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

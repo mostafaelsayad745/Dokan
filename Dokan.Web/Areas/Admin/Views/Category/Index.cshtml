@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Category>
+﻿@using Dokan.Models.Models.ProductCatalog
+@model IEnumerable<Category>
 
 @{
     ViewBag.PageTitle = "category managment";
@@ -7,29 +8,39 @@
 }
 
 <div>
-    <a class="btn btn-primary" href="Create">Create New Category</a>
+    <a class="btn btn-primary" asp-action="Create">Create New Category</a>
 </div>
 
 <br />
 
-<table class="table table-hover w-100">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Created At</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var category in Model)
-    {
+<table class="table table-hover w-100 data-table">
+    <thead>
         <tr>
-    
-            <td>@category.Name </td>
-            <td>@category.Description </td>
-            <td>@category.CreatedAt</td>
-            <td>
-                <a class="btn btn-info" href="Edit/@category.Id">Edit</a>
-                <a class="btn btn-danger" href="Delete/@category.Id">Delete</a>
-            </td>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Actions</th>
         </tr>
-    }
+    </thead>
+   <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+    
+                <td>@category.Name </td>
+                <td>@category.Description </td>
+                <td>@category.CreatedAt</td>
+                <td>
+                    <a class="btn btn-info" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@category.Id">Delete</a>
+                </td>
+            </tr>
+        }
+   </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/DataTable&DeleteSweetalert.js"></script>
+
+
+                }

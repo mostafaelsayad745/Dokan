@@ -1,6 +1,6 @@
 ﻿
 using Dokan.DataAccess.Data;
-using Dokan.Models.Models;
+using Dokan.Models.Models.ProductCatalog;
 using Dokan.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +20,16 @@ namespace Dokan.DataAccess.ReposIplementaion
             var productToUpdate = await _context.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
             if (productToUpdate != null) {
                 productToUpdate.Name = product.Name;
-                productToUpdate.Description = product.Description;
+                productToUpdate.FullDescription = product.FullDescription;
+                productToUpdate.SKU= product.SKU;
+                productToUpdate.BrandId = product.BrandId;
+                productToUpdate.CreatedAt = DateTime.UtcNow;
+                productToUpdate.StockQuantity = product.StockQuantity;
+                productToUpdate.IsActive = product.IsActive;
+                productToUpdate.Slug= product.Slug;
+                productToUpdate.OldPrice = product.OldPrice;
                 productToUpdate.Price = product.Price;
-                productToUpdate.Img = product.Img;
+                productToUpdate.ProductImages = product.ProductImages;
                 productToUpdate.CategoryId = product.CategoryId;
             }
         }

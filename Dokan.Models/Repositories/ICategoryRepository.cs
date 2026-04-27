@@ -1,6 +1,4 @@
-﻿
-
-using Dokan.Models.Models;
+﻿using Dokan.Models.Models.ProductCatalog;
 
 namespace Dokan.Models.Repositories
 {

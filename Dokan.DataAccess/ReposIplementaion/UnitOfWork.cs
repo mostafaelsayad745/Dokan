@@ -11,12 +11,14 @@ namespace Dokan.DataAccess.ReposIplementaion
 
         public ICategoryRepository Categories { get; private set; }
         public IProductRepository Products { get; private set; }
+        public IBrandRepository Brands { get; private set; }
+
         public UnitOfWork(DokanDbContext context)               
         {
             _context = context;
             Categories = new CategoryRepository(_context);
             Products = new ProductRepository(_context);
-
+            Brands = new BrandRepository(_context);
         }
 
         public async Task<int> Complete()
@@ -26,7 +28,7 @@ namespace Dokan.DataAccess.ReposIplementaion
 
         public void Dispose()
         {
-            
+
             _context.Dispose();
         }
     }

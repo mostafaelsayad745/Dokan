@@ -1,6 +1,6 @@
 ﻿
 using Dokan.DataAccess.Data;
-using Dokan.Models.Models;
+using Dokan.Models.Models.ProductCatalog;
 using Dokan.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +22,10 @@ namespace Dokan.DataAccess.ReposIplementaion
                 categoryToUpdate.Name = category.Name;
                 categoryToUpdate.Description = category.Description;
                 categoryToUpdate.CreatedAt = DateTime.Now;
+                categoryToUpdate.ParentCategoryId= category.ParentCategoryId;
+                categoryToUpdate.ImageUrl = category.ImageUrl;
+                categoryToUpdate.Slug = category.Slug;
+
             }
         }
     }

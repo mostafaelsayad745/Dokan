@@ -5,6 +5,7 @@ namespace Dokan.Models.Repositories
     {
         ICategoryRepository Categories { get; }
         IProductRepository Products { get; }
+        IBrandRepository Brands { get; }
         Task<int> Complete();
     }
 }
